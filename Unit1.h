@@ -22,6 +22,7 @@ __published:	// IDE-managed Components
         TImage *LeftPaddle;
         TTimer *LeftPaddleUp;
         TTimer *LeftPaddleDown;
+        TLabel *Scores;
         void __fastcall BallTimerTimer(TObject *Sender);
         void __fastcall RightPaddleDownTimer(TObject *Sender);
         void __fastcall RightPaddleUpTimer(TObject *Sender);

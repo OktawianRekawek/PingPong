@@ -12,6 +12,9 @@ TForm1 *Form1;
 int dX = 5;
 int dY = -5;
 
+int rightPoints = 0;
+int leftPoints = 0;
+
 //---------------------------------------------------------------------------
 __fastcall TForm1::TForm1(TComponent* Owner)
         : TForm(Owner)
@@ -38,6 +41,10 @@ void __fastcall TForm1::BallTimerTimer(TObject *Sender)
                         dX = -dX;
         } else if (Ball->Left+Ball->Width > RightPaddle->Left+RightPaddle->Width/2){
                 BallTimer->Enabled = false;
+                Ball->Visible = false;
+                leftPoints++;
+                Scores->Caption = IntToStr(leftPoints) + " : " + IntToStr(rightPoints);
+                Scores->Visible = true;
         }
         //left paddle hit or miss
         if (Ball->Left <= LeftPaddle->Left+LeftPaddle->Width/2 &&
@@ -47,6 +54,9 @@ void __fastcall TForm1::BallTimerTimer(TObject *Sender)
                         dX = -dX;
         } else if (Ball->Left < LeftPaddle->Left+LeftPaddle->Width/2){
                 BallTimer->Enabled = false;
+                rightPoints++;
+                Scores->Caption = IntToStr(leftPoints) + " : " + IntToStr(rightPoints);
+                Scores->Visible = true;
         }
 }
 //---------------------------------------------------------------------------
