@@ -30,5 +30,16 @@ void __fastcall TForm1::BallTimerTimer(TObject *Sender)
         //hit bottom wall
         if ((Ball->Top+Ball->Height) >= Background->Height)
                 dY = -dY;
+
+}
+//---------------------------------------------------------------------------
+void __fastcall TForm1::RightPaddleDownTimer(TObject *Sender)
+{
+        RightPaddle->Top += 10;        
+}
+//---------------------------------------------------------------------------
+void __fastcall TForm1::RightPaddleUpTimer(TObject *Sender)
+{
+        RightPaddle->Top -= 10;        
 }
 //---------------------------------------------------------------------------
