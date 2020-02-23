@@ -33,7 +33,7 @@ void __fastcall TForm1::BallTimerTimer(TObject *Sender)
         //left player get point or right paddle hit
         if (Ball->Left+Ball->Width > RightPaddle->Left+RightPaddle->Width/2+5){
                 BallTimer->Enabled = false;
-        } else if (Ball->Left+Ball->Width >= RightPaddle->Left/2 &&
+        } else if (Ball->Left+Ball->Width >= RightPaddle->Left+RightPaddle->Width/2 &&
                    Ball->Top <= RightPaddle->Top+RightPaddle->Height &&
                    Ball->Top+Ball->Height >= RightPaddle->Top) {
                 dX = -dX;
@@ -46,7 +46,7 @@ void __fastcall TForm1::BallTimerTimer(TObject *Sender)
 void __fastcall TForm1::RightPaddleDownTimer(TObject *Sender)
 {
         if (RightPaddle->Top+RightPaddle->Height < Background->Height)
-                RightPaddle->Top += 10;        
+                RightPaddle->Top += 10;
 }
 //---------------------------------------------------------------------------
 void __fastcall TForm1::RightPaddleUpTimer(TObject *Sender)
@@ -64,6 +64,12 @@ void __fastcall TForm1::FormKeyDown(TObject *Sender, WORD &Key,
         //right paddle down
         if (Key == VK_DOWN)
                 RightPaddleDown->Enabled = true;
+         //left paddle up
+        if (Key == 'A' || Key == 'a')
+                LeftPaddleUp->Enabled = true;
+        //left paddle down
+        if (Key == 'Z' || Key == 'z')
+                LeftPaddleDown->Enabled = true;
 }
 //---------------------------------------------------------------------------
 void __fastcall TForm1::FormKeyUp(TObject *Sender, WORD &Key,
@@ -75,5 +81,17 @@ void __fastcall TForm1::FormKeyUp(TObject *Sender, WORD &Key,
         // right paddle down - stop
         if (Key == VK_DOWN)
                 RightPaddleDown->Enabled = false;
+        //left paddle up - stop
+        if (Key == 'A' || Key == 'a')
+                LeftPaddleUp->Enabled = false;
+        //left paddle down - stop
+        if (Key == 'Z' || Key == 'z')
+                LeftPaddleDown->Enabled = false;
+}
+//---------------------------------------------------------------------------
+void __fastcall TForm1::LeftPaddleUpTimer(TObject *Sender)
+{
+        if (LeftPaddle->Top > 0)
+                LeftPaddle->Top -= 10;
 }
 //---------------------------------------------------------------------------
