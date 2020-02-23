@@ -30,13 +30,14 @@ void __fastcall TForm1::BallTimerTimer(TObject *Sender)
         //hit bottom wall
         if ((Ball->Top+Ball->Height) >= Background->Height)
                 dY = -dY;
-        //left player get point or right paddle hit
-        if (Ball->Left+Ball->Width > RightPaddle->Left+RightPaddle->Width/2+5){
+        //right paddle hit or miss
+        if (Ball->Left+Ball->Width >= RightPaddle->Left+RightPaddle->Width/2 &&
+            Ball->Top <= RightPaddle->Top+RightPaddle->Height &&
+            Ball->Top+Ball->Height >= RightPaddle->Top) {
+                if (dX > 0)
+                        dX = -dX;
+        } else if (Ball->Left+Ball->Width > RightPaddle->Left+RightPaddle->Width/2){
                 BallTimer->Enabled = false;
-        } else if (Ball->Left+Ball->Width >= RightPaddle->Left+RightPaddle->Width/2 &&
-                   Ball->Top <= RightPaddle->Top+RightPaddle->Height &&
-                   Ball->Top+Ball->Height >= RightPaddle->Top) {
-                dX = -dX;
         }
 
         if (Ball->Left < 0)
@@ -93,5 +94,11 @@ void __fastcall TForm1::LeftPaddleUpTimer(TObject *Sender)
 {
         if (LeftPaddle->Top > 0)
                 LeftPaddle->Top -= 10;
+}
+//---------------------------------------------------------------------------
+void __fastcall TForm1::LeftPaddleDownTimer(TObject *Sender)
+{
+        if (LeftPaddle->Top+LeftPaddle->Height < Background->Height)
+                LeftPaddle->Top += 10;
 }
 //---------------------------------------------------------------------------
