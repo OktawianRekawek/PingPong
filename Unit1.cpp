@@ -43,3 +43,19 @@ void __fastcall TForm1::RightPaddleUpTimer(TObject *Sender)
         RightPaddle->Top -= 10;        
 }
 //---------------------------------------------------------------------------
+void __fastcall TForm1::FormKeyDown(TObject *Sender, WORD &Key,
+      TShiftState Shift)
+{
+        //right paddle up
+        if (Key == VK_UP)
+                RightPaddleUp->Enabled = true;        
+}
+//---------------------------------------------------------------------------
+void __fastcall TForm1::FormKeyUp(TObject *Sender, WORD &Key,
+      TShiftState Shift)
+{
+        // right paddle up - stop
+        if (Key == VK_UP)
+                RightPaddleUp->Enabled = false;        
+}
+//---------------------------------------------------------------------------
