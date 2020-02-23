@@ -35,12 +35,14 @@ void __fastcall TForm1::BallTimerTimer(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TForm1::RightPaddleDownTimer(TObject *Sender)
 {
-        RightPaddle->Top += 10;        
+        if (RightPaddle->Top+RightPaddle->Height < Background->Height)
+                RightPaddle->Top += 10;        
 }
 //---------------------------------------------------------------------------
 void __fastcall TForm1::RightPaddleUpTimer(TObject *Sender)
 {
-        RightPaddle->Top -= 10;        
+        if (RightPaddle->Top > 0)
+                RightPaddle->Top -= 10;
 }
 //---------------------------------------------------------------------------
 void __fastcall TForm1::FormKeyDown(TObject *Sender, WORD &Key,
@@ -48,7 +50,10 @@ void __fastcall TForm1::FormKeyDown(TObject *Sender, WORD &Key,
 {
         //right paddle up
         if (Key == VK_UP)
-                RightPaddleUp->Enabled = true;        
+                RightPaddleUp->Enabled = true;
+        //right paddle down
+        if (Key == VK_DOWN)
+                RightPaddleDown->Enabled = true;
 }
 //---------------------------------------------------------------------------
 void __fastcall TForm1::FormKeyUp(TObject *Sender, WORD &Key,
@@ -56,6 +61,9 @@ void __fastcall TForm1::FormKeyUp(TObject *Sender, WORD &Key,
 {
         // right paddle up - stop
         if (Key == VK_UP)
-                RightPaddleUp->Enabled = false;        
+                RightPaddleUp->Enabled = false;
+        // right paddle down - stop
+        if (Key == VK_DOWN)
+                RightPaddleDown->Enabled = false;
 }
 //---------------------------------------------------------------------------
