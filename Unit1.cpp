@@ -45,6 +45,8 @@ void __fastcall TForm1::BallTimerTimer(TObject *Sender)
                 leftPoints++;
                 Scores->Caption = IntToStr(leftPoints) + " : " + IntToStr(rightPoints);
                 Scores->Visible = true;
+                NextRound->Visible = true;
+
         }
         //left paddle hit or miss
         if (Ball->Left <= LeftPaddle->Left+LeftPaddle->Width/2 &&
@@ -57,6 +59,7 @@ void __fastcall TForm1::BallTimerTimer(TObject *Sender)
                 rightPoints++;
                 Scores->Caption = IntToStr(leftPoints) + " : " + IntToStr(rightPoints);
                 Scores->Visible = true;
+                NextRound->Visible = true;
         }
 }
 //---------------------------------------------------------------------------
@@ -116,5 +119,16 @@ void __fastcall TForm1::LeftPaddleDownTimer(TObject *Sender)
 {
         if (LeftPaddle->Top+LeftPaddle->Height < Background->Height)
                 LeftPaddle->Top += 10;
+}
+//---------------------------------------------------------------------------
+void __fastcall TForm1::NextRoundClick(TObject *Sender)
+{
+        Scores->Visible = false;
+        NextRound->Visible = false;
+        dX = -dX;
+        Ball->Left = Background->Width/2 - Ball->Width/2;
+        Ball->Top = Background->Height/2 - Ball->Height/2;
+        Ball->Visible = true;
+        BallTimer->Enabled = true;
 }
 //---------------------------------------------------------------------------
