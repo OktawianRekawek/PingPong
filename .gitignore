@@ -1,0 +1,11 @@
+*.txt
+*.bpr
+*.res
+*.dfm
+*.exe
+*.obj
+*.tds
+*.~cpp
+*.~dfm
+*.~h
+img/
