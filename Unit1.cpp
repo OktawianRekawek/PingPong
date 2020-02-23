@@ -9,7 +9,7 @@
 #pragma resource "*.dfm"
 TForm1 *Form1;
 
-int dX = 0;
+int dX = 5;
 int dY = -5;
 
 //---------------------------------------------------------------------------
@@ -30,7 +30,17 @@ void __fastcall TForm1::BallTimerTimer(TObject *Sender)
         //hit bottom wall
         if ((Ball->Top+Ball->Height) >= Background->Height)
                 dY = -dY;
+        //left player get point or right paddle hit
+        if (Ball->Left+Ball->Width > RightPaddle->Left+RightPaddle->Width/2+5){
+                BallTimer->Enabled = false;
+        } else if (Ball->Left+Ball->Width >= RightPaddle->Left/2 &&
+                   Ball->Top <= RightPaddle->Top+RightPaddle->Height &&
+                   Ball->Top+Ball->Height >= RightPaddle->Top) {
+                dX = -dX;
+        }
 
+        if (Ball->Left < 0)
+                dX = -dX;
 }
 //---------------------------------------------------------------------------
 void __fastcall TForm1::RightPaddleDownTimer(TObject *Sender)
