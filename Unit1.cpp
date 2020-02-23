@@ -39,9 +39,15 @@ void __fastcall TForm1::BallTimerTimer(TObject *Sender)
         } else if (Ball->Left+Ball->Width > RightPaddle->Left+RightPaddle->Width/2){
                 BallTimer->Enabled = false;
         }
-
-        if (Ball->Left < 0)
-                dX = -dX;
+        //left paddle hit or miss
+        if (Ball->Left <= LeftPaddle->Left+LeftPaddle->Width/2 &&
+            Ball->Top <= LeftPaddle->Top+LeftPaddle->Height &&
+            Ball->Top+Ball->Height >= LeftPaddle->Top) {
+                if (dX < 0)
+                        dX = -dX;
+        } else if (Ball->Left < LeftPaddle->Left+LeftPaddle->Width/2){
+                BallTimer->Enabled = false;
+        }
 }
 //---------------------------------------------------------------------------
 void __fastcall TForm1::RightPaddleDownTimer(TObject *Sender)
