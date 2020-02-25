@@ -14,6 +14,7 @@ int dY = -5;
 
 int rightPoints = 0;
 int leftPoints = 0;
+int numberOfHits = 0;
 
 //---------------------------------------------------------------------------
 __fastcall TForm1::TForm1(TComponent* Owner)
@@ -39,6 +40,7 @@ void __fastcall TForm1::BallTimerTimer(TObject *Sender)
             Ball->Top+Ball->Height >= RightPaddle->Top) {
                 if (dX > 0)
                         dX = -dX;
+                numberOfHits++;
         } else if (Ball->Left+Ball->Width > RightPaddle->Left+RightPaddle->Width/2){
                 BallTimer->Enabled = false;
                 Ball->Visible = false;
@@ -48,6 +50,8 @@ void __fastcall TForm1::BallTimerTimer(TObject *Sender)
                 NextRound->Visible = true;
                 WhoGotsPoint->Caption = "< Punkt dla gracza lewego";
                 WhoGotsPoint->Visible = true;
+                NumberOfHits->Caption = "Liczba odbiæ: " + IntToStr(numberOfHits);
+                NumberOfHits->Visible = true;
         }
         //left paddle hit or miss
         if (Ball->Left <= LeftPaddle->Left+LeftPaddle->Width/2 &&
@@ -55,6 +59,7 @@ void __fastcall TForm1::BallTimerTimer(TObject *Sender)
             Ball->Top+Ball->Height >= LeftPaddle->Top) {
                 if (dX < 0)
                         dX = -dX;
+                numberOfHits++;
         } else if (Ball->Left < LeftPaddle->Left+LeftPaddle->Width/2){
                 BallTimer->Enabled = false;
                 rightPoints++;
@@ -63,6 +68,8 @@ void __fastcall TForm1::BallTimerTimer(TObject *Sender)
                 NextRound->Visible = true;
                 WhoGotsPoint->Caption = "Punkt dla gracza prawego >";
                 WhoGotsPoint->Visible = true;
+                NumberOfHits->Caption = "Liczba odbiæ: " + IntToStr(numberOfHits);
+                NumberOfHits->Visible = true;
         }
 }
 //---------------------------------------------------------------------------
@@ -134,5 +141,7 @@ void __fastcall TForm1::NextRoundClick(TObject *Sender)
         Ball->Visible = true;
         BallTimer->Enabled = true;
         WhoGotsPoint->Visible = false;
+        NumberOfHits->Visible = false;
+        numberOfHits = 0;
 }
 //---------------------------------------------------------------------------
