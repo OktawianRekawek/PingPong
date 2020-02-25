@@ -29,10 +29,10 @@ void __fastcall TForm1::BallTimerTimer(TObject *Sender)
         Ball->Top += dY;
 
         //hit top wall
-        if (Ball->Top <= 0)
+        if (Ball->Top <= 0 && dY < 0)
                 dY = -dY;
         //hit bottom wall
-        if ((Ball->Top+Ball->Height) >= Background->Height)
+        if ((Ball->Top+Ball->Height) >= Background->Height && dY > 0)
                 dY = -dY;
         //right paddle hit or miss
         if (Ball->Left+Ball->Width >= RightPaddle->Left+RightPaddle->Width/2 &&
@@ -41,6 +41,19 @@ void __fastcall TForm1::BallTimerTimer(TObject *Sender)
                 if (dX > 0)
                         dX = -dX;
                 numberOfHits++;
+                if (numberOfHits%5 == 0 && numberOfHits < 20){
+                        dX-=2;
+                }
+                if ( Ball->Top <= RightPaddle->Top+RightPaddle->Height/4)
+                        dY = -8;
+                else if ( Ball->Top >= RightPaddle->Top+(3*RightPaddle->Height/4))
+                        dY = 8;
+                else {
+                        if (dY > 0)
+                                dY = -5;
+                        else
+                                dY = 5;
+                }
         } else if (Ball->Left+Ball->Width > RightPaddle->Left+RightPaddle->Width/2){
                 BallTimer->Enabled = false;
                 Ball->Visible = false;
@@ -61,6 +74,19 @@ void __fastcall TForm1::BallTimerTimer(TObject *Sender)
                 if (dX < 0)
                         dX = -dX;
                 numberOfHits++;
+                if (numberOfHits%5 == 0 && numberOfHits < 20){
+                        dX+=2;
+                }
+                if ( Ball->Top <= LeftPaddle->Top+LeftPaddle->Height/4)
+                        dY = -8;
+                else if ( Ball->Top >= LeftPaddle->Top+(3*LeftPaddle->Height/4))
+                        dY = 8;
+                else {
+                        if (dY > 0)
+                                dY = -5;
+                        else
+                                dY = 5;
+                }
         } else if (Ball->Left < LeftPaddle->Left+LeftPaddle->Width/2){
                 BallTimer->Enabled = false;
                 rightPoints++;
@@ -137,7 +163,11 @@ void __fastcall TForm1::NextRoundClick(TObject *Sender)
 {
         Scores->Visible = false;
         NextRound->Visible = false;
-        dX = -dX;
+        if (dX > 0)
+                dX = -6;
+        else
+                dX = 6;
+        dY = 5;
         Ball->Left = Background->Width/2 - Ball->Width/2;
         Ball->Top = Background->Height/2 - Ball->Height/2;
         Ball->Visible = true;
@@ -152,7 +182,7 @@ void __fastcall TForm1::NewGameClick(TObject *Sender)
 {
         NewGame->Visible = false;
         WhoGotsPoint->Visible = false;
-        dX = 5;
+        dX = 6;
         dY = 5;
         rightPoints = 0;
         leftPoints = 0;
