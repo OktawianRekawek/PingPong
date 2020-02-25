@@ -46,7 +46,8 @@ void __fastcall TForm1::BallTimerTimer(TObject *Sender)
                 Scores->Caption = IntToStr(leftPoints) + " : " + IntToStr(rightPoints);
                 Scores->Visible = true;
                 NextRound->Visible = true;
-
+                WhoGotsPoint->Caption = "< Punkt dla gracza lewego";
+                WhoGotsPoint->Visible = true;
         }
         //left paddle hit or miss
         if (Ball->Left <= LeftPaddle->Left+LeftPaddle->Width/2 &&
@@ -60,6 +61,8 @@ void __fastcall TForm1::BallTimerTimer(TObject *Sender)
                 Scores->Caption = IntToStr(leftPoints) + " : " + IntToStr(rightPoints);
                 Scores->Visible = true;
                 NextRound->Visible = true;
+                WhoGotsPoint->Caption = "Punkt dla gracza prawego >";
+                WhoGotsPoint->Visible = true;
         }
 }
 //---------------------------------------------------------------------------
@@ -130,5 +133,6 @@ void __fastcall TForm1::NextRoundClick(TObject *Sender)
         Ball->Top = Background->Height/2 - Ball->Height/2;
         Ball->Visible = true;
         BallTimer->Enabled = true;
+        WhoGotsPoint->Visible = false;
 }
 //---------------------------------------------------------------------------

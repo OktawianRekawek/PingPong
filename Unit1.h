@@ -24,6 +24,7 @@ __published:	// IDE-managed Components
         TTimer *LeftPaddleDown;
         TLabel *Scores;
         TButton *NextRound;
+        TLabel *WhoGotsPoint;
         void __fastcall BallTimerTimer(TObject *Sender);
         void __fastcall RightPaddleDownTimer(TObject *Sender);
         void __fastcall RightPaddleUpTimer(TObject *Sender);
