@@ -9,8 +9,8 @@
 #pragma resource "*.dfm"
 TForm1 *Form1;
 
-int dX = 5;
-int dY = -5;
+int dX = 0;
+int dY = 0;
 
 int rightPoints = 0;
 int leftPoints = 0;
@@ -52,6 +52,7 @@ void __fastcall TForm1::BallTimerTimer(TObject *Sender)
                 WhoGotsPoint->Visible = true;
                 NumberOfHits->Caption = "Liczba odbiæ: " + IntToStr(numberOfHits);
                 NumberOfHits->Visible = true;
+                NewGame->Visible = true;
         }
         //left paddle hit or miss
         if (Ball->Left <= LeftPaddle->Left+LeftPaddle->Width/2 &&
@@ -70,6 +71,7 @@ void __fastcall TForm1::BallTimerTimer(TObject *Sender)
                 WhoGotsPoint->Visible = true;
                 NumberOfHits->Caption = "Liczba odbiæ: " + IntToStr(numberOfHits);
                 NumberOfHits->Visible = true;
+                NewGame->Visible = true;
         }
 }
 //---------------------------------------------------------------------------
@@ -143,5 +145,26 @@ void __fastcall TForm1::NextRoundClick(TObject *Sender)
         WhoGotsPoint->Visible = false;
         NumberOfHits->Visible = false;
         numberOfHits = 0;
+        NewGame->Visible = false;
 }
 //---------------------------------------------------------------------------
+void __fastcall TForm1::NewGameClick(TObject *Sender)
+{
+        NewGame->Visible = false;
+        WhoGotsPoint->Visible = false;
+        dX = 5;
+        dY = 5;
+        rightPoints = 0;
+        leftPoints = 0;
+        numberOfHits = 0;
+        Scores->Visible = false;
+        NextRound->Visible = false;
+        Ball->Left = Background->Width/2 - Ball->Width/2;
+        Ball->Top = Background->Height/2 - Ball->Height/2;
+        Ball->Visible = true;
+        BallTimer->Enabled = true;
+        WhoGotsPoint->Visible = false;
+        NumberOfHits->Visible = false;
+}
+//---------------------------------------------------------------------------
+
