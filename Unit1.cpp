@@ -2,6 +2,7 @@
 
 #include <vcl.h>
 #pragma hdrstop
+#include "mmsystem.h"
 
 #include "Unit1.h"
 //---------------------------------------------------------------------------
@@ -50,10 +51,11 @@ void __fastcall TForm1::BallTimerTimer(TObject *Sender)
                         dY = 8;
                 else {
                         if (dY > 0)
-                                dY = -5;
-                        else
                                 dY = 5;
+                        else
+                                dY = -5;
                 }
+                sndPlaySound("snd/paddle.wav", SND_ASYNC);
         } else if (Ball->Left+Ball->Width > RightPaddle->Left+RightPaddle->Width/2){
                 BallTimer->Enabled = false;
                 Ball->Visible = false;
@@ -83,10 +85,11 @@ void __fastcall TForm1::BallTimerTimer(TObject *Sender)
                         dY = 8;
                 else {
                         if (dY > 0)
-                                dY = -5;
-                        else
                                 dY = 5;
+                        else
+                                dY = -5;
                 }
+                sndPlaySound("snd/paddle.wav", SND_ASYNC);
         } else if (Ball->Left < LeftPaddle->Left+LeftPaddle->Width/2){
                 BallTimer->Enabled = false;
                 rightPoints++;

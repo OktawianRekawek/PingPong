@@ -8,4 +8,6 @@
 *.~cpp
 *.~dfm
 *.~h
+*.~bpr
 img/
+snd/
