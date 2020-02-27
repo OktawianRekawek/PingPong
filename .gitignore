@@ -2,7 +2,6 @@
 *.bpr
 *.res
 *.dfm
-*.exe
 *.obj
 *.tds
 *.~cpp
@@ -10,4 +9,3 @@
 *.~h
 *.~bpr
 img/
-snd/
